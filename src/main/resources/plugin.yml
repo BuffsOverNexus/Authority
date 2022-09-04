@@ -1,0 +1,11 @@
+main: com.buffsovernexus.Authority
+name: Authority
+version: '1.0'
+description: Handles a Minecraft server's basic authoritative interactions.
+author: BuffsOverNexus
+website: buffsovernexus.com/authority
+
+commands:
+  authority:
+    description: Foo command
+    usage: /authority <args>
