@@ -60,7 +60,6 @@ public class AuthorityPlayerService {
             player.sendMessage(String.format(">> #%s - %s <<", authorityPlayer.getId(), authorityPlayer.getName()));
             player.sendMessage();
             player.sendMessage(String.format("UUID: %s", authorityPlayer.getUuid()));
-            player.sendMessage(String.format("# of Homes: %s", authorityPlayer.getHomes().size()));
             player.sendMessage(String.format("Joined: %s", DateUtil.convertDateToPretty(authorityPlayer.getJoined())));
             player.sendMessage(String.format("Last Seen: %s", DateUtil.convertDateToPretty(authorityPlayer.getLastSeen())));
         } catch (Exception ex) {

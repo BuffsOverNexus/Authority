@@ -1,12 +1,13 @@
 package com.buffsovernexus.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.util.Date;
-import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Table(name="authority_player")
@@ -17,7 +18,7 @@ public class AuthorityPlayer {
     @GenericGenerator(name="increment", strategy = "increment")
     private Integer id;
 
-    private UUID uuid;
+    private String uuid;
 
     private String name;
 
@@ -25,7 +26,4 @@ public class AuthorityPlayer {
 
     private Date lastSeen;
 
-    @OneToMany(cascade= CascadeType.ALL)
-    @JoinColumn(name="home_id")
-    private List<AuthorityHome> homes;
 }
