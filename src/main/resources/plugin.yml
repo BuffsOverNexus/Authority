@@ -7,5 +7,4 @@ website: buffsovernexus.com/authority
 
 commands:
   authority:
-    description: Foo command
-    usage: /authority <args>
+    description: Handles all authority-related commands
