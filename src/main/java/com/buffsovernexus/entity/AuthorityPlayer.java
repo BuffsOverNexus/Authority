@@ -24,6 +24,6 @@ public class AuthorityPlayer {
 
     private Date joined = new Date();
 
-    private Date lastSeen;
+    private Date lastSeen = new Date();
 
 }

@@ -30,7 +30,7 @@ public class AuthorityPlayerKilling implements Listener {
                 AuthorityPlayer authorityKiller = AuthorityPlayerFactory.getPlayerByPlayer(session, killer);
                 String message = event.getDeathMessage();
 
-                AuthorityPlayerKill authorityPlayerKill = com.buffsovernexus.entity.AuthorityPlayerKill.builder()
+                AuthorityPlayerKill authorityPlayerKill = AuthorityPlayerKill.builder()
                         .killer(authorityKiller)
                         .victim(authorityPlayer)
                         .message(message)

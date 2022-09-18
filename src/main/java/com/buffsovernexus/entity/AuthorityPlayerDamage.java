@@ -28,5 +28,10 @@ public class AuthorityPlayerDamage {
 
     private Date occurred;
 
-    private String cause;
+    private Double damage;
+
+    @Override
+    public String toString() {
+        return String.format("%s has damaged %s by %s", attacker.getName(), defender.getName(), damage);
+    }
 }

@@ -21,7 +21,7 @@ public class AuthorityPlayerDamaging implements Listener {
             if (event.getDamager() instanceof Player && event.getEntity() instanceof Player) {
                 Player attacker = (Player) event.getDamager();
                 Player defender = (Player) event.getEntity();
-                String cause = event.getCause().toString();
+                double damage = event.getDamage();
 
                 // Retrieve players from database
                 Session session = HibernateUtil.sessionFactory.openSession();
@@ -31,11 +31,11 @@ public class AuthorityPlayerDamaging implements Listener {
 
                 // Create the object to record the damage event
                 AuthorityPlayerDamage authorityPlayerDamage =
-                        com.buffsovernexus.entity.AuthorityPlayerDamage.builder()
+                        AuthorityPlayerDamage.builder()
                                 .attacker(authorityAttacker)
                                 .defender(authorityDefender)
-                                .cause(cause)
                                 .occurred(new Date())
+                                .damage(damage)
                                 .build();
 
                 // Persist event and finish.

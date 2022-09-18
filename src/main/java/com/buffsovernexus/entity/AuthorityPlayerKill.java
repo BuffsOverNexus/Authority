@@ -8,7 +8,7 @@ import org.hibernate.annotations.GenericGenerator;
 import java.util.Date;
 
 @Entity
-@Table(name = "authority_player_killing")
+@Table(name = "authority_player_kill")
 @Data
 @Builder
 public class AuthorityPlayerKill {
