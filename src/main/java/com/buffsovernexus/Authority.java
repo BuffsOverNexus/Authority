@@ -1,6 +1,7 @@
 package com.buffsovernexus;
 
 import com.buffsovernexus.command.AuthorityCommand;
+import com.buffsovernexus.command.ChatCommand;
 import com.buffsovernexus.command.HomeCommand;
 import com.buffsovernexus.enumerator.Config;
 import com.buffsovernexus.event.AuthorityPlayerDamaging;
@@ -46,6 +47,7 @@ public class Authority extends JavaPlugin {
             Objects.requireNonNull(this.getCommand("dhome")).setExecutor(new HomeCommand());
             Objects.requireNonNull(this.getCommand("shome")).setExecutor(new HomeCommand());
             Objects.requireNonNull(this.getCommand("ahomes")).setExecutor(new HomeCommand());
+            Objects.requireNonNull(this.getCommand("cclear")).setExecutor(new ChatCommand());
 
         } catch (Exception ex) {
             // Disable the plugin on exception in startup.

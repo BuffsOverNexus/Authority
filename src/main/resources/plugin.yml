@@ -16,3 +16,5 @@ commands:
     description: Delete a home
   ahomes:
     description: View all saved homes
+  cclear:
+    description: Clear chat history
