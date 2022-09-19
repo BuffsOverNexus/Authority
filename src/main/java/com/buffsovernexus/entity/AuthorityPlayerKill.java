@@ -1,8 +1,8 @@
 package com.buffsovernexus.entity;
 
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.util.Date;
@@ -10,7 +10,6 @@ import java.util.Date;
 @Entity
 @Table(name = "authority_player_kill")
 @Data
-@Builder
 public class AuthorityPlayerKill {
 
     @Id
@@ -27,6 +26,6 @@ public class AuthorityPlayerKill {
     private AuthorityPlayer victim;
 
     private String message;
-
+    @CreationTimestamp
     private Date occurred;
 }

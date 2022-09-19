@@ -1,8 +1,8 @@
 package com.buffsovernexus.entity;
 
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.util.Date;
@@ -10,7 +10,6 @@ import java.util.Date;
 @Entity
 @Table(name = "authority_player_damage")
 @Data
-@Builder
 public class AuthorityPlayerDamage {
 
     @Id
@@ -25,7 +24,7 @@ public class AuthorityPlayerDamage {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "defender_id")
     private AuthorityPlayer defender;
-
+    @CreationTimestamp
     private Date occurred;
 
     private Double damage;

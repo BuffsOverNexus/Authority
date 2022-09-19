@@ -1,6 +1,7 @@
 package com.buffsovernexus;
 
 import com.buffsovernexus.command.AuthorityCommand;
+import com.buffsovernexus.command.HomeCommand;
 import com.buffsovernexus.enumerator.Config;
 import com.buffsovernexus.event.AuthorityPlayerDamaging;
 import com.buffsovernexus.event.AuthorityPlayerJoin;
@@ -41,7 +42,10 @@ public class Authority extends JavaPlugin {
 
             // Step 4: Register commands
             Objects.requireNonNull(this.getCommand("authority")).setExecutor(new AuthorityCommand());
-//            this.getCommand("a").setExecutor(new AuthorityCommand());
+            Objects.requireNonNull(this.getCommand("ahome")).setExecutor(new HomeCommand());
+            Objects.requireNonNull(this.getCommand("dhome")).setExecutor(new HomeCommand());
+            Objects.requireNonNull(this.getCommand("shome")).setExecutor(new HomeCommand());
+            Objects.requireNonNull(this.getCommand("ahomes")).setExecutor(new HomeCommand());
 
         } catch (Exception ex) {
             // Disable the plugin on exception in startup.

@@ -30,13 +30,11 @@ public class AuthorityPlayerDamaging implements Listener {
                 AuthorityPlayer authorityDefender = AuthorityPlayerFactory.getPlayerByPlayer(session, defender);
 
                 // Create the object to record the damage event
-                AuthorityPlayerDamage authorityPlayerDamage =
-                        AuthorityPlayerDamage.builder()
-                                .attacker(authorityAttacker)
-                                .defender(authorityDefender)
-                                .occurred(new Date())
-                                .damage(damage)
-                                .build();
+                AuthorityPlayerDamage authorityPlayerDamage = new AuthorityPlayerDamage();
+                authorityPlayerDamage.setAttacker(authorityAttacker);
+                authorityPlayerDamage.setDefender(authorityDefender);
+                authorityPlayerDamage.setOccurred(new Date());
+                authorityPlayerDamage.setDamage(damage);
 
                 // Persist event and finish.
                 session.persist(authorityPlayerDamage);

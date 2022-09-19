@@ -25,6 +25,7 @@ public class AuthorityPlayerJoin implements Listener {
                 AuthorityPlayer authorityPlayer = new AuthorityPlayer();
                 authorityPlayer.setName(player.getName());
                 authorityPlayer.setUuid(player.getUniqueId().toString());
+                authorityPlayer.setJoined(new Date());
                 authorityPlayer.setLastSeen(new Date());
                 session.persist(authorityPlayer);
             }

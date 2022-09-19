@@ -1,13 +1,12 @@
 package com.buffsovernexus.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name="authority_player")
@@ -21,9 +20,13 @@ public class AuthorityPlayer {
     private String uuid;
 
     private String name;
-
-    private Date joined = new Date();
+    @CreationTimestamp
+    private Date joined;
 
     private Date lastSeen = new Date();
+
+    @OneToMany
+    @JoinColumn(name = "player_id")
+    private List<AuthorityHome> homes;
 
 }

@@ -20,7 +20,7 @@ public class AuthorityPlayerKilling implements Listener {
     public void onPlayerKillPlayer(PlayerDeathEvent event) {
         try {
             Player player = event.getEntity();
-            if (player.getKiller() != null) {
+            if (null != player.getKiller()) {
                 Player killer = player.getKiller();
 
                 // Acquire database of each user
@@ -30,12 +30,11 @@ public class AuthorityPlayerKilling implements Listener {
                 AuthorityPlayer authorityKiller = AuthorityPlayerFactory.getPlayerByPlayer(session, killer);
                 String message = event.getDeathMessage();
 
-                AuthorityPlayerKill authorityPlayerKill = AuthorityPlayerKill.builder()
-                        .killer(authorityKiller)
-                        .victim(authorityPlayer)
-                        .message(message)
-                        .occurred(new Date())
-                        .build();
+                AuthorityPlayerKill authorityPlayerKill = new AuthorityPlayerKill();
+                authorityPlayerKill.setKiller(authorityKiller);
+                authorityPlayerKill.setVictim(authorityPlayer);
+                authorityPlayerKill.setMessage(message);
+                authorityPlayerKill.setOccurred(new Date());
 
                 session.persist(authorityPlayerKill);
                 transaction.commit();

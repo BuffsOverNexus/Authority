@@ -8,3 +8,11 @@ website: buffsovernexus.com/authority
 commands:
   authority:
     description: Handles all authority-related commands
+  ahome:
+    description: Teleport to a saved home
+  shome:
+    description: Create or update a home
+  dhome:
+    description: Delete a home
+  ahomes:
+    description: View all saved homes

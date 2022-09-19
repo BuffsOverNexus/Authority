@@ -1,17 +1,13 @@
 package com.buffsovernexus.service;
 
 import com.buffsovernexus.entity.AuthorityPlayer;
-import com.buffsovernexus.entity.AuthorityPlayerDamage;
 import com.buffsovernexus.enumerator.ErrorMessage;
-import com.buffsovernexus.factory.AuthorityPlayerDamageFactory;
 import com.buffsovernexus.factory.AuthorityPlayerFactory;
 import com.buffsovernexus.utility.DateUtil;
 import com.buffsovernexus.utility.HibernateUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.hibernate.Session;
-
-import java.util.List;
 
 public class AuthorityPlayerService {
 
@@ -65,11 +61,8 @@ public class AuthorityPlayerService {
             player.sendMessage();
             player.sendMessage(String.format("Joined: %s", DateUtil.convertDateToPretty(authorityPlayer.getJoined())));
             player.sendMessage(String.format("Last Seen: %s", DateUtil.convertDateToPretty(authorityPlayer.getLastSeen())));
-
-
-            List<AuthorityPlayerDamage> playerDamageHistory = AuthorityPlayerDamageFactory.getPlayerDamageHistory(session, authorityPlayer);
-            playerDamageHistory.forEach( history -> player.sendMessage(history.getAttacker().getName() + " attacked " + history.getDefender().getName() + " on " + DateUtil.convertDateToPretty(history.getOccurred())) );
         } catch (Exception ex) {
+
             ex.printStackTrace();
         }
     }
