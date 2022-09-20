@@ -28,7 +28,11 @@ public class HomeCommand implements CommandExecutor {
 
                 if (lbl.equalsIgnoreCase("ahome")) {
                     if (args.length == 0) {
-                        player.sendMessage("Invalid command. Try: /ahome <name>");
+                        player.sendMessage("-- Authority Homes --");
+                        player.sendMessage(ChatColor.ITALIC + "/ahome <name>" + ChatColor.RESET + " - Teleport to your home with the <name>");
+                        player.sendMessage(ChatColor.ITALIC + "/ahomes" + ChatColor.RESET + " - Retrieves all of your homes");
+                        player.sendMessage(ChatColor.ITALIC + "/shome <name>" + ChatColor.RESET + " - Set a home.");
+                        player.sendMessage(ChatColor.ITALIC + "/dhome <name>" + ChatColor.RESET + " - Delete a home.");
                     } else {
                         String name = CommandUtil.convertArgsToString(args).toLowerCase();
                         Session session = HibernateUtil.sessionFactory.openSession();
@@ -57,7 +61,7 @@ public class HomeCommand implements CommandExecutor {
                     } else {
                         StringBuilder result = new StringBuilder();
                         authorityPlayer.getHomes().forEach(home ->
-                            result.append(String.format("[%s] ", home.getName()))
+                            result.append(String.format("[" + ChatColor.BOLD + "%s" + ChatColor.RESET + "] ", home.getName()))
                         );
                         player.sendMessage(result.toString());
                     }
