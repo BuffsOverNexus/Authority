@@ -44,7 +44,7 @@ public class HomeCommand implements CommandExecutor {
                             } else {
                                 matchedHomes.stream().forEach(home -> {
                                     player.teleport(home.toLocation());
-                                    player.sendMessage(String.format("Teleported to home (%s)", home.getName().toLowerCase()));
+                                    player.sendMessage(String.format("Teleported to home (" + ChatColor.BOLD + "%s" + ChatColor.RESET + ")", home.getName().toLowerCase()));
                                 });
                             }
                         } else {
@@ -117,7 +117,7 @@ public class HomeCommand implements CommandExecutor {
                             authorityPlayer.getHomes().add(authorityHome);
                         }
                         session.persist(authorityPlayer);
-                        player.sendMessage(ChatColor.GREEN + String.format("Your home, %s, has been saved/updated.", name.toLowerCase()));
+                        player.sendMessage(ChatColor.GREEN + String.format("Your home, " + ChatColor.BOLD + "%s" + ChatColor.RESET + "" + ChatColor.GREEN + ", has been saved/updated.", name.toLowerCase()));
                         transaction.commit();
                         session.close();
                     }
