@@ -30,15 +30,19 @@ public class HomeCommand implements CommandExecutor {
                     if (args.length == 0) {
                         player.sendMessage("Invalid command. Try: /ahome <name>");
                     } else {
-                        String name = CommandUtil.convertArgsToString(args);
+                        String name = CommandUtil.convertArgsToString(args).toLowerCase();
                         Session session = HibernateUtil.sessionFactory.openSession();
                         AuthorityPlayer authorityPlayer = AuthorityPlayerFactory.getPlayerByPlayer(session, player);
                         if (null != authorityPlayer.getHomes()) {
-                            authorityPlayer.getHomes().stream().filter(home -> home.getName().equalsIgnoreCase(name))
-                                    .forEach(home -> {
-                                        player.teleport(home.toLocation());
-                                        player.sendMessage(String.format("Teleported to home (%s)", home.getName().toLowerCase()));
-                                    });
+                            List<AuthorityHome> matchedHomes = authorityPlayer.getHomes().stream().filter(home -> home.getName().equalsIgnoreCase(name)).collect(Collectors.toList());
+                            if (matchedHomes.isEmpty()) {
+                                player.sendMessage(ChatColor.RED + String.format("The home, %s, was not found.", name));
+                            } else {
+                                matchedHomes.stream().forEach(home -> {
+                                    player.teleport(home.toLocation());
+                                    player.sendMessage(String.format("Teleported to home (%s)", home.getName().toLowerCase()));
+                                });
+                            }
                         } else {
                             player.sendMessage(ChatColor.RED + "You do not have any homes.");
                         }
