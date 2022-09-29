@@ -2,11 +2,11 @@ package com.buffsovernexus.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Table(name="authority_player")
@@ -17,15 +17,16 @@ public class AuthorityPlayer {
     @GenericGenerator(name="increment", strategy = "increment")
     private Integer id;
 
-    private UUID uuid;
+    private String uuid;
 
     private String name;
+    @CreationTimestamp
+    private Date joined;
 
-    private Date joined = new Date();
+    private Date lastSeen = new Date();
 
-    private Date lastSeen;
-
-    @OneToMany(cascade= CascadeType.ALL)
-    @JoinColumn(name="home_id")
+    @OneToMany
+    @JoinColumn(name = "player_id")
     private List<AuthorityHome> homes;
+
 }

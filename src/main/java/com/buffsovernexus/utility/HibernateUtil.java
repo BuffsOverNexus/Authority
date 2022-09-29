@@ -22,4 +22,5 @@ public class HibernateUtil {
             throw new Exception("Could not setup database");
         }
     }
+
 }

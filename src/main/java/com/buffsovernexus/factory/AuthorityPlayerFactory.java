@@ -21,7 +21,7 @@ public class AuthorityPlayerFactory {
 
     public static AuthorityPlayer getPlayerByUUID(Session session, UUID uuid) {
         try {
-            return session.createQuery(String.format("FROM AuthorityPlayer WHERE uuid = '%s'", uuid), AuthorityPlayer.class).getSingleResult();
+            return session.createQuery(String.format("FROM AuthorityPlayer WHERE uuid = '%s'", uuid.toString()), AuthorityPlayer.class).getSingleResult();
         } catch (NoResultException ex) {
             // THIS IS INTENDED
             return null;

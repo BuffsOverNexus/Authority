@@ -12,7 +12,7 @@ public class DateUtil {
      */
     public static String convertDateToPretty(Date date) {
         try {
-            String format = "MM/dd/yyyy hh:mm:ss a";
+            String format = "MM/dd/yy hh:mm a";
             SimpleDateFormat dateFormat = new SimpleDateFormat(format);
             return dateFormat.format(date);
         } catch (Exception ex) {
