@@ -29,4 +29,9 @@ public class AuthorityPlayer {
     @JoinColumn(name = "player_id")
     private List<AuthorityHome> homes;
 
+    @OneToMany
+    @JoinColumn(name = "home_invite_id")
+    private List<AuthorityHomeInvite> homeInvites;
+
+
 }

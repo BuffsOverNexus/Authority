@@ -18,3 +18,5 @@ commands:
     description: View all saved homes
   cclear:
     description: Clear chat history
+  invhome:
+    description: Invite a player to your house

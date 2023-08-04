@@ -1,11 +1,14 @@
 package com.buffsovernexus.command;
 
 import com.buffsovernexus.entity.AuthorityHome;
+import com.buffsovernexus.entity.AuthorityHomeInvite;
 import com.buffsovernexus.entity.AuthorityPlayer;
 import com.buffsovernexus.factory.AuthorityPlayerFactory;
 import com.buffsovernexus.utility.BooleanUtil;
 import com.buffsovernexus.utility.CommandUtil;
+import com.buffsovernexus.utility.GeneralUtil;
 import com.buffsovernexus.utility.HibernateUtil;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -17,6 +20,7 @@ import org.hibernate.Transaction;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class HomeCommand implements CommandExecutor {
@@ -42,7 +46,7 @@ public class HomeCommand implements CommandExecutor {
                             if (matchedHomes.isEmpty()) {
                                 player.sendMessage(ChatColor.RED + String.format("The home, %s, was not found.", name));
                             } else {
-                                matchedHomes.stream().forEach(home -> {
+                                matchedHomes.forEach(home -> {
                                     player.teleport(home.toLocation());
                                     player.sendMessage(String.format("Teleported to home (" + ChatColor.BOLD + "%s" + ChatColor.RESET + ")", home.getName().toLowerCase()));
                                 });
@@ -120,6 +124,41 @@ public class HomeCommand implements CommandExecutor {
                         player.sendMessage(ChatColor.GREEN + String.format("Your home, " + ChatColor.BOLD + "%s" + ChatColor.RESET + "" + ChatColor.GREEN + ", has been saved/updated.", name.toLowerCase()));
                         transaction.commit();
                         session.close();
+                    }
+                }
+
+                if (lbl.equalsIgnoreCase("invhome"))    {
+                    if (args.length < 2) {
+                        player.sendMessage("Invalid command. Try: /invhome <player> <home>");
+                    } else {
+                        String playerName = args[0].toLowerCase();
+                        String homeName = CommandUtil.convertArgsToString(1, args).toLowerCase();
+                        // Determine if the player is online
+                        Player invited = Bukkit.getPlayer(playerName);
+                        if (BooleanUtil.isFalse(Objects.isNull(invited))) {
+                            Session session = HibernateUtil.sessionFactory.openSession();
+                            Transaction transaction = session.beginTransaction();
+                            AuthorityPlayer authorityPlayer = AuthorityPlayerFactory.getPlayerByPlayer(session, player);
+                            AuthorityPlayer target = AuthorityPlayerFactory.getPlayerByPlayer(session, invited);
+                            // Determine if the player has the home.
+                            List<AuthorityHome> matchingHomes = authorityPlayer.getHomes().stream().filter(home -> home.getName().equalsIgnoreCase(homeName)).collect(Collectors.toList());
+                            if ( BooleanUtil.isGreaterThanZero(matchingHomes.size()) ) {
+                                // Just grab the first one.
+                                AuthorityHome home = matchingHomes.get(GeneralUtil.ZERO);
+                                AuthorityHomeInvite invite = new AuthorityHomeInvite();
+                                invite.setHome(home);
+                                invite.setCreatedOn(new Date());
+                                session.persist(invite);
+                                target.getHomeInvites().add(invite);
+                                session.persist(target);
+                            } else {
+                                player.sendMessage(String.format("You do not have a home by the name of " + ChatColor.BOLD + "%s", homeName));
+                            }
+                            transaction.commit();
+                            session.close();
+                        } else {
+                            player.sendMessage(String.format("The player, %s" + ChatColor.RESET + ". is not online.", ChatColor.BOLD + playerName));
+                        }
                     }
                 }
             }

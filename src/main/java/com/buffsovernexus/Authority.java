@@ -47,6 +47,7 @@ public class Authority extends JavaPlugin {
             Objects.requireNonNull(this.getCommand("dhome")).setExecutor(new HomeCommand());
             Objects.requireNonNull(this.getCommand("shome")).setExecutor(new HomeCommand());
             Objects.requireNonNull(this.getCommand("ahomes")).setExecutor(new HomeCommand());
+            Objects.requireNonNull(this.getCommand("invhome")).setExecutor(new HomeCommand());
             Objects.requireNonNull(this.getCommand("cclear")).setExecutor(new ChatCommand());
 
         } catch (Exception ex) {

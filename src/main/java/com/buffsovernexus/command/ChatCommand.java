@@ -14,7 +14,7 @@ public class ChatCommand implements CommandExecutor {
                 Player player = (Player) sender;
                 if (lbl.equalsIgnoreCase("cclear")) {
                     for (int i = 0; i < 200; i++) {
-                        player.sendMessage();
+                        player.sendMessage(" ");
                     }
                     player.sendMessage(ChatColor.YELLOW + "" + ChatColor.BOLD + "Your chat has been cleared.");
                 }
